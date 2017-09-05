@@ -1,0 +1,23 @@
+{
+  "displayName": "TrustArc Notice",
+  "name": "trustarc-notice",
+  "version": "1.0.0",
+  "description": "Trustarc's Cookie Consent Notice Implementation",
+  "author": {
+    "name": "TrustArc"
+  },
+  "viewBasePath": "src/view/",
+  "actions": [
+    {
+      "displayName": "Notice detail input",
+      "name": "notice-detail-input",
+      "libPath": "src/lib/actions/noticeDetailInput.js",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      },
+      "viewPath": "actions/noticeDetailInput.html"
+    }
+  ]
+}

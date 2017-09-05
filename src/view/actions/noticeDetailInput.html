@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Action</title>
+  </head>
+  <body>
+      <form>
+        <label>
+          <span class="label">Domain:</span>
+          <input id="name">
+        </label>
+        <br/>
+        <label>
+          <span class="label">Container ID:</span>
+          <input id="container">
+        </label>
+      </form>
+
+    <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+    <script>
+      
+      window.extensionBridge.register({
+        init: function(info) {
+          if (info.settings) {
+            document.getElementById('name').value = info.settings.domain || ''; 
+            document.getElementById('container').value = info.settings.container || '';
+          }
+        },
+
+        getSettings: function() {
+            return {
+                domain: document.getElementById('name').value || '',
+                container: document.getElementById('container').value || ''
+            }
+        },
+
+        validate: function() {
+          return true;
+        }
+      });
+    </script>
+  </body>
+</html>

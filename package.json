@@ -1,0 +1,17 @@
+{
+  "name": "adobenotice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "scaffold": "reactor-scaffold",
+    "sandbox": "reactor-sandbox"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@adobe/reactor-sandbox": "^7.21.1",
+    "@adobe/reactor-scaffold": "^1.1.9",
+    "@adobe/reactor-turbine": "^20.2.2"
+  }
+}
