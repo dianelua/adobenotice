@@ -19,5 +19,17 @@
       },
       "viewPath": "actions/noticeDetailInput.html"
     }
+  ],
+  "events": [
+    {
+      "displayName": "Load",
+      "name": "load",
+      "libPath": "src/lib/events/load.js",
+      "schema": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "properties": {}
+      }
+    }
   ]
 }

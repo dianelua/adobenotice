@@ -4,6 +4,14 @@ module.exports = {
   rules: [
       {
       name: 'Example Rule',
+      events: [
+        {
+          modulePath: 'trustarc-notice/src/lib/events/load.js',
+          settings: {
+            delay: 2000
+          }
+        }
+      ],
       actions: [
         {
           modulePath: 'trustarc-notice/src/lib/actions/noticeDetailInput.js',
