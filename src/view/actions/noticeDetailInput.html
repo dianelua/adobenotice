@@ -1,44 +1,132 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Action</title>
-  </head>
-  <body>
-      <form>
-        <label>
-          <span class="label">Domain:</span>
-          <input id="name">
-        </label>
-        <br/>
-        <label>
-          <span class="label">Container ID:</span>
-          <input id="container">
-        </label>
-      </form>
-
-    <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
-    <script>
-      
-      window.extensionBridge.register({
-        init: function(info) {
-          if (info.settings) {
-            document.getElementById('name').value = info.settings.domain || ''; 
-            document.getElementById('container').value = info.settings.container || '';
-          }
-        },
-
-        getSettings: function() {
-            return {
-                domain: document.getElementById('name').value || '',
-                container: document.getElementById('container').value || ''
-            }
-        },
-
-        validate: function() {
-          return true;
-        }
-      });
-    </script>
-  </body>
+   <head>
+      <meta charset="UTF-8">
+      <title>Action</title>
+      <link rel="stylesheet" href="//assets.adobedtm.com/activation/reactor/coralui/3.16.0/css/coral.css">
+   </head>
+   <body class="coral--light">
+      <div>
+         <div class="coral-Form-fieldset" style="margin-top:10px;display:none;border:1px solid #ccc;padding:10px;background:#eee;" id="nonclientVerbiage">              
+                  For non-TrustArc clients,
+                  see <a class="coral-Link" href="https://www.trustarc.com/products/consent-manager/contact-us/">Cookie Consent Sales Contact Page</a>
+                  and <a class="coral-Link" href="https://www.trustarc.com/products/consent-manager/">Cookie Consent Demo & Product Page</a>
+        </div>
+         <form>
+            <section class="coral-Form-fieldset">
+               <label>
+                  <h3><span class="label">Domain</span></h3>
+                  </label>
+                  <span class="coral-DecoratedTextfield">
+                  <input id="domain" onkeyup="noticeValidation.check()"  class="coral-DecoratedTextfield-input coral-Textfield"  is="coral-textfield">
+                  </span>
+                  <coral-wait class="coral-Wait" style="display:none;" id="domainLoading"></coral-wait>
+               <br/>
+               <label>
+                  <h3><span class="label">Container ID</span></h3>
+                  </label>
+                  <span class="coral-DecoratedTextfield">
+                  <input id="container"  class="coral-DecoratedTextfield-input coral-Textfield"  is="coral-textfield">
+                   </span>
+                  <coral-icon style="display:none;" class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" icon="infoCircle" size="S" id="coral-form-aligned-inputgroup-fieldinfo" role="img" aria-label="info circle"></coral-icon>
+                 
+               
+            </section>
+         </form>
+      </div>
+      <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+      <script>     
+         var noticeValidation = function(isValid) {
+             var xmlHttp = new XMLHttpRequest();
+             function httpGetAsync(theUrl, callback, fail) {    
+                 xmlHttp.onreadystatechange = function() {
+                     if (xmlHttp.readyState == 4) {
+                         if (xmlHttp.status == 200) {
+                             callback(xmlHttp.responseText);
+                         } else if (xmlHttp.status == 299) {
+                             fail(xmlHttp.responseText);
+                         }
+                     }
+             
+                 }
+                 xmlHttp.abort();
+                 xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+                 xmlHttp.send(null);
+             }
+             function debounce(func, wait, immediate) {
+                 var timeout;
+                 return function() {
+                     var context = this,
+                         args = arguments;
+                     var later = function() {
+                         timeout = null;
+                         if (!immediate) func.apply(context, args);
+                     };
+                     var callNow = immediate && !timeout;
+                     clearTimeout(timeout);
+                     timeout = setTimeout(later, wait);
+                     if (callNow) func.apply(context, args);
+                 };
+             }
+             function success() {
+                 //console.log("Domain valid.");
+                 trustarcValidate = true;
+                 domainLoading.style.display = "none";
+             }
+             function fail() {
+                 //console.log("Domain invalid.");
+                 trustarcValidate = false;
+                 domainLoading.style.display = "none";
+             }
+             function checkDomain(domain) {
+                 //console.log('Checking Domain');
+                 httpGetAsync('//localhost:8080/domain?name=' + domain, success, fail);
+             }
+             
+             var call = debounce(function() {
+                     var domain = document.getElementById('domain');
+                     if(domain.value) {
+                        checkDomain(domain.value); 
+                     } 
+             }, 1300);
+             
+             return {
+                isValid: function() {
+                    return trustarcValidate;
+                },
+                setValid: function(isValid) {
+                    trustarcValidate = isValid;
+                },
+                check: function() {
+                    domainLoading.style.display= "";
+                    call();
+                }
+            };
+         }();
+         
+         window.extensionBridge.register({
+             init: function(info) {
+                 if (info.settings) {
+                     document.getElementById('domain').value = info.settings.domain;
+                     noticeValidation.setValid(true);
+                     //trustarcValidate = true;
+                     document.getElementById('container').value = info.settings.container;
+                 } else {
+                      document.getElementById('nonclientVerbiage').style.display = 'block';
+                 }
+             },
+         
+             getSettings: function() {
+                 return {
+                     domain: document.getElementById('domain').value || '',
+                     container: document.getElementById('container').value || ''
+                 }
+             },
+         
+             validate: function() {
+                 return trustarcValidate;
+             }
+         });
+      </script>
+   </body>
 </html>
