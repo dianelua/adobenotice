@@ -9,8 +9,8 @@
       <div>
          <div class="coral-Form-fieldset" style="margin-top:10px;display:none;border:1px solid #ccc;padding:10px;background:#eee;" id="nonclientVerbiage">              
                   For non-TrustArc clients,
-                  see <a class="coral-Link" href="https://www.trustarc.com/products/consent-manager/contact-us/">Cookie Consent Sales Contact Page</a>
-                  and <a class="coral-Link" href="https://www.trustarc.com/products/consent-manager/">Cookie Consent Demo & Product Page</a>
+                  see <a class="coral-Link" href="https://www.trustarc.com/products/consent-manager/contact-us/" target="_blank">Cookie Consent Sales Contact Page</a>
+                  and <a class="coral-Link" href="https://www.trustarc.com/products/consent-manager/" target="_blank">Cookie Consent Demo & Product Page</a>
         </div>
          <form>
             <section class="coral-Form-fieldset">
@@ -68,21 +68,22 @@
                      if (callNow) func.apply(context, args);
                  };
              }
+             
+             var trustarcValid = false;
              function success() {
                  //console.log("Domain valid.");
-                 trustarcValidate = true;
+                 trustarcValid = true;
                  domainLoading.style.display = "none";
              }
              function fail() {
                  //console.log("Domain invalid.");
-                 trustarcValidate = false;
+                 trustarcValid = false;
                  domainLoading.style.display = "none";
              }
              function checkDomain(domain) {
                  //console.log('Checking Domain');
                  httpGetAsync('//localhost:8080/domain?name=' + domain, success, fail);
              }
-             
              var call = debounce(function() {
                      var domain = document.getElementById('domain');
                      if(domain.value) {
@@ -90,12 +91,17 @@
                      } 
              }, 1300);
              
+             
+             
              return {
                 isValid: function() {
-                    return trustarcValidate;
+                    return trustarcValid;
                 },
                 setValid: function(isValid) {
-                    trustarcValidate = isValid;
+                    trustarcValid = isValid;
+                },
+                getValid: function() {
+                    return trustarcValid;
                 },
                 check: function() {
                     domainLoading.style.display= "";
@@ -109,7 +115,6 @@
                  if (info.settings) {
                      document.getElementById('domain').value = info.settings.domain;
                      noticeValidation.setValid(true);
-                     //trustarcValidate = true;
                      document.getElementById('container').value = info.settings.container;
                  } else {
                       document.getElementById('nonclientVerbiage').style.display = 'block';
@@ -124,7 +129,7 @@
              },
          
              validate: function() {
-                 return trustarcValidate;
+                 return noticeValidation.getValid();
              }
          });
       </script>
