@@ -74,7 +74,7 @@ module.exports = {
   },
   extensions: {
       'trustarc-notice': {
-          displayName: 'TrustArc Notice',
+          displayName: 'TrustArc Cookie Consent Manager',
           settings: {}
     }
     // Set up an extension configuration you would like to test. The top-level object key is the
