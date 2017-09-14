@@ -90,7 +90,7 @@
 
             function checkDomain(domain) {
                 //console.log('Checking Domain');
-                httpGetAsync('//localhost:8080/domain?name=' + domain, success, fail);
+                httpGetAsync('//consent.truste.com/domain?name=' + domain, success, fail);
             }
             var call = debounce(function() {
                 var domain = document.getElementById('domain');
