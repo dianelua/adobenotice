@@ -1,17 +1,24 @@
 {
   "name": "adobenotice",
   "version": "1.0.0",
-  "description": "",
+  "description": "A powerful, flexible, proven solution to address Cookie Compliance. Whether it's implied consent, expressed consent, or a hybrid method, we can make sure you're delivering the correct notice each time. Cookie Consent Manager is hosted on reliable and proven infrastructure, so we can provide some of the highest uptime SLAs in the industry.",
   "main": "index.js",
   "scripts": {
     "scaffold": "reactor-scaffold",
-    "sandbox": "reactor-sandbox"
+    "sandbox": "reactor-sandbox",
+    "package": "reactor-packager"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.truste-svc.net:7999/eu/adobe-integration.git"
   },
   "author": "",
   "license": "UNLICENSED",
   "devDependencies": {
+    "@adobe/reactor-packager": "^2.6.0",
     "@adobe/reactor-sandbox": "^7.21.1",
     "@adobe/reactor-scaffold": "^1.1.9",
-    "@adobe/reactor-turbine": "^20.2.2"
+    "@adobe/reactor-turbine": "^20.2.2",
+    "ajv": "^5.2.3"
   }
 }

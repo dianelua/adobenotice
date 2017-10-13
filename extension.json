@@ -6,6 +6,7 @@
   "author": {
     "name": "TrustArc"
   },
+  "iconPath": "logo_trustarc_vertical.svg",
   "viewBasePath": "src/view/",
   "actions": [
     {
