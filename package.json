@@ -16,9 +16,9 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "@adobe/reactor-packager": "^2.6.0",
-    "@adobe/reactor-sandbox": "^7.21.1",
+    "@adobe/reactor-sandbox": "^8.1.0",
     "@adobe/reactor-scaffold": "^1.1.9",
-    "@adobe/reactor-turbine": "^20.2.2",
+    "@adobe/reactor-turbine": "^22.1.1",
     "ajv": "^5.2.3"
   }
 }
