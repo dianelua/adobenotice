@@ -10,7 +10,7 @@
   "viewBasePath": "src/view/",
   "actions": [
     {
-      "displayName": "Notice detail input",
+      "displayName": "Notice Details",
       "name": "notice-detail-input",
       "libPath": "src/lib/actions/noticeDetailInput.js",
       "schema": {
