@@ -41,7 +41,9 @@
     <script>
         var noticeValidation = function(isValid) {
             var xmlHttp = new XMLHttpRequest();
-
+            var domainField = document.getElementById('domain');
+            var domainLoading = document.getElementById('domainLoading');
+            
             function httpGetAsync(theUrl, callback, fail) {
                 xmlHttp.onreadystatechange = function() {
                     if (xmlHttp.readyState == 4) {
@@ -85,6 +87,7 @@
             function fail() {
                 //console.log("Domain invalid.");
                 trustarcValid = false;
+                domainField.classList.add("is-invalid");
                 domainLoading.style.display = "none";
             }
 
@@ -93,13 +96,12 @@
                 httpGetAsync('//consent.truste.com/domain?name=' + domain, success, fail);
             }
             var call = debounce(function() {
-                var domain = document.getElementById('domain');
-                if (domain.value) {
-                    checkDomain(domain.value);
+                if (domainField.value) {
+                    checkDomain(domainField.value);
+                } else {
+                    fail();
                 }
             }, 1300);
-
-
 
             return {
                 isValid: function() {
@@ -112,6 +114,7 @@
                     return trustarcValid;
                 },
                 check: function() {
+                    domainField.classList.remove("is-invalid");
                     domainLoading.style.display = "";
                     call();
                 }
