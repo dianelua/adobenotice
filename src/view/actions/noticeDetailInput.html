@@ -114,6 +114,7 @@
                     return trustarcValid;
                 },
                 check: function() {
+                    trustarcValid = false;
                     domainField.classList.remove("is-invalid");
                     domainLoading.style.display = "";
                     call();
