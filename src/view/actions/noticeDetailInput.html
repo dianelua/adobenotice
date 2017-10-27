@@ -9,8 +9,7 @@
 
 <body class="coral--light">
     <div>
-
-        <form>
+        <form class="coral-Form coral-Form--vertical">
             <section class="coral-Form-fieldset">
                 <label>
                   <h3><span class="label">Domain</span></h3>
@@ -22,13 +21,19 @@
                 <br/>
                 <label>
                   <h3><span class="label">Container ID</span></h3>
-                  </label>
+                </label>
                 <span class="coral-DecoratedTextfield">
                   <input id="container"  class="coral-DecoratedTextfield-input coral-Textfield"  is="coral-textfield">
                    </span>
                 <coral-icon style="display:none;" class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" icon="infoCircle" size="S" id="coral-form-aligned-inputgroup-fieldinfo" role="img" aria-label="info circle"></coral-icon>
-
-
+                <label>
+                  <h3><span class="label">Zero Cookie Load</span></h3>
+                </label>
+                <label class="coral-Checkbox">
+                  <input class="coral-Checkbox-input" type="checkbox" name="c1" id="zeroCookie">
+                  <span class="coral-Checkbox-checkmark"></span>
+                  <span class="coral-Checkbox-description">Require that no trackers, outside of the exceptions, are dropped until user has consented</span>
+                </label>
             </section>
         </form>
         <div class="coral-Form-fieldset" style="margin-top:10px;display:none;border:1px solid #ccc;padding:16px;background:#eee;" id="nonclientVerbiage">
@@ -128,6 +133,7 @@
                     document.getElementById('domain').value = info.settings.domain;
                     noticeValidation.setValid(true);
                     document.getElementById('container').value = info.settings.container;
+                    document.getElementById("zeroCookie").checked = info.settings.gtm;
                 } else {
                     document.getElementById('nonclientVerbiage').style.display = 'block';
                 }
@@ -136,7 +142,8 @@
             getSettings: function() {
                 return {
                     domain: document.getElementById('domain').value || '',
-                    container: document.getElementById('container').value || ''
+                    container: document.getElementById('container').value || '',
+                    gtm: document.getElementById('zeroCookie').value
                 }
             },
 

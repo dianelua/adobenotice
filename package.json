@@ -16,9 +16,13 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "@adobe/reactor-packager": "^2.6.0",
-    "@adobe/reactor-sandbox": "^8.1.0",
+    "@adobe/reactor-sandbox": "^8.2.0",
     "@adobe/reactor-scaffold": "^1.1.9",
-    "@adobe/reactor-turbine": "^22.1.1",
-    "ajv": "^5.2.3"
+    "@adobe/reactor-turbine": "^23.0.0",
+    "ajv": "^5.3.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^3.8.1"
   }
 }
