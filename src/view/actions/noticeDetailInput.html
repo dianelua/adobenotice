@@ -4,6 +4,8 @@
       <meta charset="UTF-8">
       <title>Action</title>
       <link rel="stylesheet" href="//assets.adobedtm.com/activation/reactor/coralui/3.16.0/css/coral.css">
+      <script src="https://assets.adobedtm.com/activation/reactor/coralui/3.16.0/js/libs/jquery.js"></script>
+      <script src="https://assets.adobedtm.com/activation/reactor/coralui/3.16.0/js/coral.js"></script>
    </head>
    <body class="coral--light">
       <div id="content" style="margin: 15px;">
@@ -25,17 +27,20 @@
                      <span class="coral-InputGroup-button">
                      </span>
                   </div>
-                  <coral-icon style="display:none;" class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" icon="infoCircle" size="S" id="coral-form-aligned-inputgroup-fieldinfo" role="img" aria-label="info circle"></coral-icon>
                </div>
                <div class="coral-Form-fieldwrapper">
                   <label class="coral-Form-fieldlabel">Consent Banner</label>
                   <div class="coral-InputGroup coral-Form-field">
-                     <label class="coral-Checkbox">
+                     <label class="coral-Checkbox" id="bannerCheckBox">
                      <input class="coral-Checkbox-input" type="checkbox" id="banner">
                      <span class="coral-Checkbox-checkmark"></span>
                      <span class="coral-Checkbox-description">Show banner</span>
                      </label>
+                     <span class="coral-Icon coral-Icon--sizeXS coral-Icon--infoCircle InfoTip-icon" role="img" id="bannerInfo" style="padding:.625rem 0px .625rem"></span>
                   </div>
+                 <coral-tooltip placement="right" target="#bannerInfo" style="width: 40%;">
+                 Banner will append to #consent_blackbar element.
+                 </coral-tooltip>
                </div>
                <div class="coral-Form-fieldwrapper">
                   <label class="coral-Form-fieldlabel">Zero Cookie Load</label>
