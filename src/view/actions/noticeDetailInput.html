@@ -29,6 +29,16 @@
                   </div>
                </div>
                <div class="coral-Form-fieldwrapper">
+                  <label class="coral-Form-fieldlabel">Text</label>
+                  <div class="coral-InputGroup coral-Form-field" style="width:70%;">
+                     <label class="coral-Checkbox">
+                     <input class="coral-Checkbox-input" type="checkbox" id="text">
+                     <span class="coral-Checkbox-checkmark"></span>
+                     <span class="coral-Checkbox-description">Show Cookie Preference link instead of image</span>
+                     </label>
+                  </div>
+               </div>
+               <div class="coral-Form-fieldwrapper">
                   <label class="coral-Form-fieldlabel">Consent Banner</label>
                   <div class="coral-InputGroup coral-Form-field">
                      <label class="coral-Checkbox" id="bannerCheckBox">
@@ -152,6 +162,7 @@
                      document.getElementById('container').value = info.settings.container;
                      document.getElementById('zeroCookie').checked = info.settings.gtm;
                      document.getElementById('banner').checked = info.settings.banner;
+                     document.getElementById('text').checked = info.settings.text;
                  } else {
                      document.getElementById('nonclientVerbiage').style.display = 'block';
                  }
@@ -162,7 +173,8 @@
                      domain: document.getElementById('domain').value || '',
                      container: document.getElementById('container').value || '',
                      gtm: document.getElementById('zeroCookie').value,
-                     banner: document.getElementById('banner').value
+                     banner: document.getElementById('banner').value,
+                     text: document.getElementById('text').value
                  }
              },
          
