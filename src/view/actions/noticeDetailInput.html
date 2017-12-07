@@ -1,157 +1,170 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Action</title>
-    <link rel="stylesheet" href="//assets.adobedtm.com/activation/reactor/coralui/3.16.0/css/coral.css">
-</head>
-
-<body class="coral--light">
-    <div>
-        <form class="coral-Form coral-Form--vertical">
+   <head>
+      <meta charset="UTF-8">
+      <title>Action</title>
+      <link rel="stylesheet" href="//assets.adobedtm.com/activation/reactor/coralui/3.16.0/css/coral.css">
+   </head>
+   <body class="coral--light">
+      <div id="content" style="margin: 15px;">
+         <form class="coral-Form coral-Form--aligned u-columnLarge">
             <section class="coral-Form-fieldset">
-                <label>
-                  <h3><span class="label">Domain</span></h3>
-                  </label>
-                <span class="coral-DecoratedTextfield">
-                  <input id="domain" onkeyup="noticeValidation.check()"  class="coral-DecoratedTextfield-input coral-Textfield"  is="coral-textfield">
-                  </span>
-                <coral-wait class="coral-Wait" style="display:none; margin-left:5px; margin-top:8px;" id="domainLoading"></coral-wait>
-                <br/>
-                <label>
-                  <h3><span class="label">Container ID</span></h3>
-                </label>
-                <span class="coral-DecoratedTextfield">
-                  <input id="container"  class="coral-DecoratedTextfield-input coral-Textfield"  is="coral-textfield">
-                   </span>
-                <coral-icon style="display:none;" class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" icon="infoCircle" size="S" id="coral-form-aligned-inputgroup-fieldinfo" role="img" aria-label="info circle"></coral-icon>
-                <label>
-                  <h3><span class="label">Zero Cookie Load</span></h3>
-                </label>
-                <label class="coral-Checkbox">
-                  <input class="coral-Checkbox-input" type="checkbox" name="c1" id="zeroCookie">
-                  <span class="coral-Checkbox-checkmark"></span>
-                  <span class="coral-Checkbox-description">Require that no trackers, outside of the exceptions, are dropped until user has consented</span>
-                </label>
+               <div class="coral-Form-fieldwrapper">
+                  <label class="coral-Form-fieldlabel">Domain</label>
+                  <div class="coral-InputGroup coral-Form-field">
+                     <input id="domain" onkeyup="noticeValidation.check()" class="coral-DecoratedTextfield-input coral-Textfield" is="coral-textfield">
+                     <span class="coral-InputGroup-button">
+                        <coral-wait class="coral-Wait" style="display:none; margin-left:5px; margin-top:8px;" id="domainLoading"></coral-wait>
+                     </span>
+                  </div>
+               </div>
+               <div class="coral-Form-fieldwrapper">
+                  <label class="coral-Form-fieldlabel">Container ID</label>
+                  <div class="coral-InputGroup coral-Form-field">
+                     <input id="container"  class="coral-DecoratedTextfield-input coral-Textfield"  is="coral-textfield">
+                     <span class="coral-InputGroup-button">
+                     </span>
+                  </div>
+                  <coral-icon style="display:none;" class="coral-Form-fieldinfo coral-Icon coral-Icon--infoCircle coral-Icon--sizeS" icon="infoCircle" size="S" id="coral-form-aligned-inputgroup-fieldinfo" role="img" aria-label="info circle"></coral-icon>
+               </div>
+               <div class="coral-Form-fieldwrapper">
+                  <label class="coral-Form-fieldlabel">Consent Banner</label>
+                  <div class="coral-InputGroup coral-Form-field">
+                     <label class="coral-Checkbox">
+                     <input class="coral-Checkbox-input" type="checkbox" id="banner">
+                     <span class="coral-Checkbox-checkmark"></span>
+                     <span class="coral-Checkbox-description">Show banner</span>
+                     </label>
+                  </div>
+               </div>
+               <div class="coral-Form-fieldwrapper">
+                  <label class="coral-Form-fieldlabel">Zero Cookie Load</label>
+                  <div class="coral-InputGroup coral-Form-field" style="width:70%;">
+                     <label class="coral-Checkbox">
+                     <input class="coral-Checkbox-input" type="checkbox" id="zeroCookie">
+                     <span class="coral-Checkbox-checkmark"></span>
+                     <span class="coral-Checkbox-description">Require that no trackers, outside of the exceptions, are dropped until user has consented</span>
+                     </label>
+                  </div>
+               </div>
             </section>
-        </form>
-        <div class="coral-Form-fieldset" style="margin-top:10px;display:none;border:1px solid #ccc;padding:16px;background:#eee;" id="nonclientVerbiage">
+         </form>
+         <div class="coral-Form-fieldset" style="margin-top:10px;display:none;border:1px solid #ccc;padding:16px;background:#eee;" id="nonclientVerbiage">
             For companies interested in the TrustArc Cookie Consent Manager,
-            <a class="coral-Link" href="https://www.trustarc.com/products/consent-manager/contact-us/" target="_blank">click here to contact us</a>. To learn more, here is the <a class="coral-Link" href="https://www.trustarc.com/products/consent-manager/"
-                target="_blank">Cookie Consent Demo & Product Page</a>.
-        </div>
-    </div>
-    <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
-    <script>
-        var noticeValidation = function(isValid) {
-            var xmlHttp = new XMLHttpRequest();
-            var domainField = document.getElementById('domain');
-            var domainLoading = document.getElementById('domainLoading');
-            
-            function httpGetAsync(theUrl, callback, fail) {
-                xmlHttp.onreadystatechange = function() {
-                    if (xmlHttp.readyState == 4) {
-                        if (xmlHttp.status == 200) {
-                            callback(xmlHttp.responseText);
-                        } else if (xmlHttp.status == 299) {
-                            fail(xmlHttp.responseText);
-                        }
-                    }
-
-                }
-                xmlHttp.abort();
-                xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-                xmlHttp.send(null);
-            }
-
-            function debounce(func, wait, immediate) {
-                var timeout;
-                return function() {
-                    var context = this,
-                        args = arguments;
-                    var later = function() {
-                        timeout = null;
-                        if (!immediate) func.apply(context, args);
-                    };
-                    var callNow = immediate && !timeout;
-                    clearTimeout(timeout);
-                    timeout = setTimeout(later, wait);
-                    if (callNow) func.apply(context, args);
-                };
-            }
-
-            var trustarcValid = false;
-
-            function success() {
-                //console.log("Domain valid.");
-                trustarcValid = true;
-                domainLoading.style.display = "none";
-            }
-
-            function fail() {
-                //console.log("Domain invalid.");
-                trustarcValid = false;
-                domainField.classList.add("is-invalid");
-                domainLoading.style.display = "none";
-            }
-
-            function checkDomain(domain) {
-                //console.log('Checking Domain');
-                httpGetAsync('//consent.truste.com/domain?name=' + domain, success, fail);
-            }
-            var call = debounce(function() {
-                if (domainField.value) {
-                    checkDomain(domainField.value);
-                } else {
-                    fail();
-                }
-            }, 1300);
-
-            return {
-                isValid: function() {
-                    return trustarcValid;
-                },
-                setValid: function(isValid) {
-                    trustarcValid = isValid;
-                },
-                getValid: function() {
-                    return trustarcValid;
-                },
-                check: function() {
-                    trustarcValid = false;
-                    domainField.classList.remove("is-invalid");
-                    domainLoading.style.display = "";
-                    call();
-                }
-            };
-        }();
-
-        window.extensionBridge.register({
-            init: function(info) {
-                if (info.settings) {
-                    document.getElementById('domain').value = info.settings.domain;
-                    noticeValidation.setValid(true);
-                    document.getElementById('container').value = info.settings.container;
-                    document.getElementById("zeroCookie").checked = info.settings.gtm;
-                } else {
-                    document.getElementById('nonclientVerbiage').style.display = 'block';
-                }
-            },
-
-            getSettings: function() {
-                return {
-                    domain: document.getElementById('domain').value || '',
-                    container: document.getElementById('container').value || '',
-                    gtm: document.getElementById('zeroCookie').value
-                }
-            },
-
-            validate: function() {
-                return noticeValidation.getValid();
-            }
-        });
-    </script>
-</body>
-
+            <a class="coral-Link" href="https://www.trustarc.com/products/consent-manager/contact-us/" target="_blank">click here to contact us</a>. To learn more, here is the <a class="coral-Link" href="https://www.trustarc.com/products/consent-manager/" target="_blank">Cookie Consent Demo & Product Page</a>.
+         </div>
+      </div>
+      <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+      <script>
+         var noticeValidation = function(isValid) {
+             var xmlHttp = new XMLHttpRequest();
+             var domainField = document.getElementById('domain');
+             var domainLoading = document.getElementById('domainLoading');
+         
+             function httpGetAsync(theUrl, callback, fail) {
+                 xmlHttp.onreadystatechange = function() {
+                     if (xmlHttp.readyState == 4) {
+                         if (xmlHttp.status == 200) {
+                             callback(xmlHttp.responseText);
+                         } else if (xmlHttp.status == 299) {
+                             fail(xmlHttp.responseText);
+                         }
+                     }
+         
+                 }
+                 xmlHttp.abort();
+                 xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+                 xmlHttp.send(null);
+             }
+         
+             function debounce(func, wait, immediate) {
+                 var timeout;
+                 return function() {
+                     var context = this,
+                         args = arguments;
+                     var later = function() {
+                         timeout = null;
+                         if (!immediate) func.apply(context, args);
+                     };
+                     var callNow = immediate && !timeout;
+                     clearTimeout(timeout);
+                     timeout = setTimeout(later, wait);
+                     if (callNow) func.apply(context, args);
+                 };
+             }
+         
+             var trustarcValid = false;
+         
+             function success() {
+                 //console.log("Domain valid.");
+                 trustarcValid = true;
+                 domainLoading.style.display = "none";
+             }
+         
+             function fail() {
+                 //console.log("Domain invalid.");
+                 trustarcValid = false;
+                 domainField.classList.add("is-invalid");
+                 domainLoading.style.display = "none";
+             }
+         
+             function checkDomain(domain) {
+                 //console.log('Checking Domain');
+                 httpGetAsync('//consent.truste.com/domain?name=' + domain, success, fail);
+             }
+             var call = debounce(function() {
+                 if (domainField.value) {
+                     checkDomain(domainField.value);
+                 } else {
+                     fail();
+                 }
+             }, 1300);
+         
+             return {
+                 isValid: function() {
+                     return trustarcValid;
+                 },
+                 setValid: function(isValid) {
+                     trustarcValid = isValid;
+                 },
+                 getValid: function() {
+                     return trustarcValid;
+                 },
+                 check: function() {
+                     trustarcValid = false;
+                     domainField.classList.remove("is-invalid");
+                     domainLoading.style.display = "";
+                     call();
+                 }
+             };
+         }();
+         
+         window.extensionBridge.register({
+             init: function(info) {
+                 if (info.settings) {
+                     document.getElementById('domain').value = info.settings.domain;
+                     noticeValidation.setValid(true);
+                     document.getElementById('container').value = info.settings.container;
+                     document.getElementById('zeroCookie').checked = info.settings.gtm;
+                     document.getElementById('banner').checked = info.settings.banner;
+                 } else {
+                     document.getElementById('nonclientVerbiage').style.display = 'block';
+                 }
+             },
+         
+             getSettings: function() {
+                 return {
+                     domain: document.getElementById('domain').value || '',
+                     container: document.getElementById('container').value || '',
+                     gtm: document.getElementById('zeroCookie').value,
+                     banner: document.getElementById('banner').value
+                 }
+             },
+         
+             validate: function() {
+                 return noticeValidation.getValid();
+             }
+         });
+      </script>
+   </body>
 </html>

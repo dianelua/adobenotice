@@ -1,7 +1,7 @@
 {
   "displayName": "Cookie Consent Manager",
   "name": "trustarc-notice",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A powerful, flexible, proven solution to address Cookie Compliance.",
   "author": {
     "name": "TrustArc"
@@ -10,7 +10,7 @@
   "viewBasePath": "src/view/",
   "actions": [
     {
-      "displayName": "Notice Details",
+      "displayName": "Notice Tag",
       "name": "notice-detail-input",
       "libPath": "src/lib/actions/noticeDetailInput.js",
       "schema": {
