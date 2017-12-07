@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Extension Configuration</title>
+  </head>
+  <body>
+    <div class="coral--light" id="nonclientVerbiage" style="margin: 5%;">
+        For companies interested in the TrustArc Cookie Consent Manager,
+        <a class="coral-Link" href="https://www.trustarc.com/products/consent-manager/contact-us/" target="_blank">click here to contact us</a>.<br/>
+        To learn more, here is the <a class="coral-Link" href="https://www.trustarc.com/products/consent-manager/"
+            target="_blank">Cookie Consent Demo & Product Page</a>.
+    </div>
+    
+    <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+    <script>
+      window.extensionBridge.register({
+        init: function(info) {
+          if (info.settings) {
+            // TODO Populate form values from persisted settings.
+          }
+        },
+
+        getSettings: function() {
+          return {};
+        },
+
+        validate: function() {
+          return true;
+        }
+      });
+    </script>
+  </body>
+</html>
