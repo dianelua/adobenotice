@@ -8,6 +8,8 @@
   },
   "iconPath": "logo_trustarc_vertical.svg",
   "viewBasePath": "src/view/",
+  "platform": "web",
+  "exchangeUrl": "https://www.adobeexchange.com/experiencecloud.details.100058.html",
   "actions": [
     {
       "displayName": "Notice Tag",
